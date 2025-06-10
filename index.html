@@ -32,7 +32,7 @@
             font-size: 48px;
             border-bottom: 2px dashed #000;
             margin: 20px 0;
-            width: 80%;
+            width: 100%;
             padding-bottom: 10px;
         }
 
@@ -62,14 +62,17 @@
         }
 
         function updateTracing() {
-            const query = getQueryParameter("text");
+            const text = getQueryParameter("text");
+            const repeat = parseInt(getQueryParameter("repeat")) || 1;
             const outputDiv = document.getElementById("tracingOutput");
 
-            if (query) {
-                const tracingLine = document.createElement("div");
-                tracingLine.className = "tracing-line";
-                tracingLine.textContent = query;
-                outputDiv.appendChild(tracingLine);
+            if (text) {
+                for (var i = 1; i <= repeat; i++) {
+                    const tracingLine = document.createElement("div");
+                    tracingLine.className = "tracing-line";
+                    tracingLine.innerHTML = text.replace(" ", "&nbsp;");
+                    outputDiv.appendChild(tracingLine);
+                }
             }
         }
 
